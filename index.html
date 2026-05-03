@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MarketBay - Online Shopping</title>
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="MarketBay home">
+        <span class="brand-mark">m</span>
+        <span>MarketBay</span>
+      </a>
+
+      <button class="location" type="button">
+        <span class="icon">LOC</span>
+        <span>
+          <small>Deliver to</small>
+          <strong>New Delhi 110001</strong>
+        </span>
+      </button>
+
+      <form class="search" id="searchForm">
+        <select aria-label="Search category" id="categorySelect">
+          <option value="all">All</option>
+          <option value="tech">Tech</option>
+          <option value="home">Home</option>
+          <option value="fashion">Fashion</option>
+          <option value="grocery">Grocery</option>
+        </select>
+        <input id="searchInput" type="search" placeholder="Search MarketBay" autocomplete="off" />
+        <button type="submit" aria-label="Search">Go</button>
+      </form>
+
+      <nav class="account-nav" aria-label="Account navigation">
+        <button type="button" id="accountButton">
+          <small>Hello, sign in</small>
+          <strong>Account</strong>
+        </button>
+        <button type="button" id="ordersButton">
+          <small>Returns</small>
+          <strong>& Orders</strong>
+        </button>
+        <button class="cart-button" type="button" id="cartButton" aria-label="Open cart">
+          <span class="cart-count" id="cartCount">0</span>
+          <span class="cart-icon">[]</span>
+          <strong>Cart</strong>
+        </button>
+      </nav>
+    </header>
+
+    <nav class="category-bar" aria-label="Departments">
+      <button type="button">Menu All</button>
+      <button type="button" data-filter="today">Today's Deals</button>
+      <button type="button" data-filter="tech">Electronics</button>
+      <button type="button" data-filter="home">Home & Kitchen</button>
+      <button type="button" data-filter="fashion">Fashion</button>
+      <button type="button" data-filter="grocery">Fresh</button>
+      <button type="button" data-filter="prime">Fast Delivery</button>
+    </nav>
+
+    <main>
+      <section class="hero" aria-label="Featured sale">
+        <div class="hero-content">
+          <p>Big savings week</p>
+          <h1>Everything for the season, delivered fast.</h1>
+          <div class="hero-actions">
+            <button class="primary-action" type="button" data-jump="deals">Shop Deals</button>
+            <button class="secondary-action" type="button" data-jump="products">Explore Store</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="quick-panels" aria-label="Shopping shortcuts">
+        <article>
+          <h2>Upgrade your setup</h2>
+          <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80" alt="Laptop and desk setup" />
+          <button type="button" data-filter="tech">Shop electronics</button>
+        </article>
+        <article>
+          <h2>Refresh the kitchen</h2>
+          <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=800&q=80" alt="Modern kitchen counter" />
+          <button type="button" data-filter="home">Shop home</button>
+        </article>
+        <article>
+          <h2>Style under budget</h2>
+          <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=800&q=80" alt="Clothing rack in a boutique" />
+          <button type="button" data-filter="fashion">Shop fashion</button>
+        </article>
+        <article>
+          <h2>Fresh essentials</h2>
+          <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80" alt="Fresh vegetables at a market" />
+          <button type="button" data-filter="grocery">Shop grocery</button>
+        </article>
+      </section>
+
+      <section class="deal-strip" id="deals" aria-label="Deals">
+        <div>
+          <p>Limited-time deals</p>
+          <h2>Lightning picks ending soon</h2>
+        </div>
+        <div class="deal-timer" aria-live="polite">
+          <span id="timerHours">05</span><small>h</small>
+          <span id="timerMinutes">00</span><small>m</small>
+          <span id="timerSeconds">00</span><small>s</small>
+        </div>
+      </section>
+
+      <section class="store-layout" id="products">
+        <aside class="filters" aria-label="Product filters">
+          <h2>Filter results</h2>
+          <label>
+            Department
+            <select id="filterDepartment">
+              <option value="all">All departments</option>
+              <option value="tech">Electronics</option>
+              <option value="home">Home & Kitchen</option>
+              <option value="fashion">Fashion</option>
+              <option value="grocery">Grocery</option>
+            </select>
+          </label>
+          <label>
+            Max price
+            <input id="priceRange" type="range" min="99" max="200000" value="200000" step="500" />
+            <span id="priceLabel">All prices</span>
+          </label>
+          <label class="checkbox">
+            <input id="primeOnly" type="checkbox" />
+            Fast delivery only
+          </label>
+          <label class="checkbox">
+            <input id="dealOnly" type="checkbox" />
+            Deals only
+          </label>
+          <button type="button" id="clearFilters">Clear filters</button>
+        </aside>
+
+        <section class="product-section" aria-live="polite">
+          <div class="section-heading">
+            <div>
+              <p id="resultCount">Showing all products</p>
+              <h2>Recommended for you</h2>
+            </div>
+            <select id="sortSelect" aria-label="Sort products">
+              <option value="featured">Featured</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="rating">Customer Rating</option>
+            </select>
+          </div>
+          <div class="products" id="productGrid"></div>
+        </section>
+      </section>
+    </main>
+
+    <aside class="cart-drawer" id="cartDrawer" aria-hidden="true" aria-label="Shopping cart">
+      <div class="cart-panel">
+        <div class="cart-header">
+          <div>
+            <p>Shopping cart</p>
+            <h2 id="cartTitle">Your cart is empty</h2>
+          </div>
+          <button type="button" id="closeCart" aria-label="Close cart">x</button>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-summary">
+          <div>
+            <span>Subtotal</span>
+            <strong id="subtotal">$0.00</strong>
+          </div>
+          <p id="shippingNote">Add items to see delivery options.</p>
+          <button type="button" id="checkoutButton">Proceed to checkout</button>
+        </div>
+      </div>
+    </aside>
+
+    <template id="productTemplate">
+      <article class="product-card">
+        <div class="product-image-wrap">
+          <img alt="" />
+          <span class="badge"></span>
+        </div>
+        <div class="product-body">
+          <p class="department"></p>
+          <h3></h3>
+          <div class="rating" aria-label=""></div>
+          <div class="price-row">
+            <strong class="price"></strong>
+            <span class="list-price"></span>
+          </div>
+          <p class="delivery"></p>
+          <button type="button">Add to cart</button>
+        </div>
+      </article>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
